@@ -1,0 +1,4 @@
+module PreferencesEditorC {
+    umbrella "."
+    export *
+}

@@ -1,0 +1,9 @@
+Package: xyz.helloyunho.preferences-editor
+Name: PreferencesEditor
+Version: 0.0.1
+Architecture: iphoneos-arm
+Description: Modify your settings' About tab!
+Maintainer: Helloyunho
+Author: Helloyunho
+Section: Tweaks
+Depends: ${ORION}, firmware (>= 12.2)
