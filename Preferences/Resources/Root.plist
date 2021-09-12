@@ -8,20 +8,32 @@
 			<key>cell</key>
 			<string>PSGroupCell</string>
 			<key>label</key>
-			<string>PreferencesEditor First Page</string>
+			<string>Settings</string>
 		</dict>
 		<dict>
+			<key>id</key>
+			<string>DeviceName</string>
 			<key>cell</key>
-			<string>PSSwitchCell</string>
-			<key>default</key>
-			<true/>
+			<string>PSEditTextCell</string>
 			<key>defaults</key>
-			<string>xyz.helloyunho.preferences-editor</string>
+			<string>xyz.helloyunho.preferences-editor-preferences</string>
 			<key>key</key>
-			<string>AwesomeSwitch1</string>
+			<string>DeviceName</string>
 			<key>label</key>
-			<string>Awesome Switch 1</string>
+			<string>Name</string>
 		</dict>
+        <dict>
+            <key>id</key>
+            <string>ProductVersion</string>
+            <key>cell</key>
+            <string>PSEditTextCell</string>
+            <key>defaults</key>
+            <string>xyz.helloyunho.preferences-editor-preferences</string>
+            <key>key</key>
+            <string>ProductVersion</string>
+            <key>label</key>
+            <string>Version</string>
+        </dict>
 	</array>
 	<key>title</key>
 	<string>PreferencesEditor</string>
