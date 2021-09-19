@@ -34,6 +34,18 @@
             <key>label</key>
             <string>Version</string>
         </dict>
+        <dict>
+            <key>id</key>
+            <string>ProductModelName</string>
+            <key>cell</key>
+            <string>PSEditTextCell</string>
+            <key>defaults</key>
+            <string>xyz.helloyunho.preferences-editor-preferences</string>
+            <key>key</key>
+            <string>ProductModelName</string>
+            <key>label</key>
+            <string>Model Name</string>
+        </dict>
 	</array>
 	<key>title</key>
 	<string>PreferencesEditor</string>

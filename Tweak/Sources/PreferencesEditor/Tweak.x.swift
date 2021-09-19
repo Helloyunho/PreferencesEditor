@@ -3,7 +3,13 @@ import PreferencesEditorC
 import Preferences
 
 class PSGAboutDataSourceHook: ClassHook<NSObject> {
-    static let targetName = "PSGAboutDataSource"
+    static var targetName: String {
+        if #available(iOS 14, *) {
+            return "PSGAboutDataSource"
+        } else {
+            return "AboutDataSource"
+        }
+    }
     private var preferences: [String: Any] {
         UserDefaults.standard.persistentDomain(forName: "xyz.helloyunho.preferences-editor-preferences") ?? [:]
     }
@@ -17,6 +23,11 @@ class PSGAboutDataSourceHook: ClassHook<NSObject> {
             case "ProductVersion":
                 if let productVersion = preferences["ProductVersion"] {
                     return productVersion
+                }
+                break
+            case "ProductModelName":
+                if let modelName = preferences["ProductModelName"] {
+                    return modelName
                 }
                 break
             default: break

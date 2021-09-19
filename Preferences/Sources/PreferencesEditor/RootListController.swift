@@ -16,6 +16,9 @@ class RootListController: PSListController {
                             specifier.setPlaceholder(UIDevice.current.name)
                         case "ProductVersion":
                             specifier.setPlaceholder(UIDevice.current.systemVersion)
+                        case "ProductModelName":
+                            let placeholder = MGCopyAnswer("bbtR9jQx50Fv5Af/affNtA" as CFString, nil).takeUnretainedValue()
+                            specifier.setPlaceholder(placeholder)
                         default: break
                         }
                     }
