@@ -21,12 +21,12 @@ class PSGAboutDataSourceHook: ClassHook<NSObject> {
         if tweakEnabled, let specifier = specifier as? PSSpecifier {
             switch specifier.identifier {
             case "ProductVersion":
-                if let productVersion = preferences["ProductVersion"] {
+                if let productVersion = preferences["ProductVersion"] as? String, !productVersion.isEmpty {
                     return productVersion
                 }
                 break
             case "ProductModelName":
-                if let modelName = preferences["ProductModelName"] {
+                if let modelName = preferences["ProductModelName"] as? String, !modelName.isEmpty {
                     return modelName
                 }
                 break
@@ -38,7 +38,7 @@ class PSGAboutDataSourceHook: ClassHook<NSObject> {
     }
     
     @objc func deviceName(_ arg1: Any) -> Any {
-        if tweakEnabled, let deviceName = preferences["DeviceName"] {
+        if tweakEnabled, let deviceName = preferences["DeviceName"] as? String, !deviceName.isEmpty {
             return deviceName
         } else {
             return orig.deviceName(arg1)
