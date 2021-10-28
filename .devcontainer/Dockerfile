@@ -34,11 +34,12 @@ RUN bash /tmp/library-scripts/node-debian.sh "${NVM_DIR}" "${NODE_VERSION}" "${U
 
 RUN sudo apt-get install -y fakeroot git perl unzip build-essential libtinfo5
 RUN echo "export THEOS=~/theos" >> ~/.profile
+RUN source ~/.profile
 RUN git clone --recursive https://github.com/theos/theos.git $THEOS
 RUN sudo apt install -y zstd
 RUN curl -LO https://github.com/CRKatri/llvm-project/releases/download/swift-5.3.2-RELEASE/swift-5.3.2-RELEASE-ubuntu18.04.tar.zst
 RUN TMP=$(mktemp -d) \
-    && tar -xvf swift-5.3.2-RELEASE-ubuntu18.04.tar.zst -C $TMP \
+    && tar -I zstd -xvf swift-5.3.2-RELEASE-ubuntu18.04.tar.zst -C $TMP \
     && mkdir -p $THEOS/toolchain/linux/iphone $THEOS/toolchain/swift \
     && mv $TMP/swift-5.3.2-RELEASE-ubuntu18.04/* $THEOS/toolchain/linux/iphone/ \
     && ln -s $THEOS/toolchain/linux/iphone $THEOS/toolchain/swift \
@@ -47,6 +48,7 @@ RUN TMP=$(mktemp -d) \
 RUN curl -LO https://github.com/theos/sdks/archive/master.zip \
     && TMP=$(mktemp -d) \
     && unzip master.zip -d $TMP \
+    && mkdir $THEOS/sdks
     && mv $TMP/sdks-master/*.sdk $THEOS/sdks \
     && rm -r master.zip $TMP
 
