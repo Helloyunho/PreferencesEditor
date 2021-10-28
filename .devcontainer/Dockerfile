@@ -5,7 +5,7 @@ FROM swift:${VARIANT}
 # [Option] Install zsh
 ARG INSTALL_ZSH="true"
 # [Option] Upgrade OS packages to their latest versions
-ARG UPGRADE_PACKAGES="false"
+ARG UPGRADE_PACKAGES="true"
 
 # Install needed packages and setup non-root user. Use a separate RUN statement to add your own dependencies.
 ARG USERNAME=vscode
@@ -32,11 +32,10 @@ COPY library-scripts/node-debian.sh /tmp/library-scripts/
 RUN bash /tmp/library-scripts/node-debian.sh "${NVM_DIR}" "${NODE_VERSION}" "${USERNAME}" \
     && rm -rf /var/lib/apt/lists/* /tmp/library-scripts
 
-RUN sudo apt-get install -y fakeroot git perl unzip build-essential libtinfo5
+RUN apt-get install -y fakeroot build-essential libtinfo5
 RUN echo "export THEOS=~/theos" >> ~/.profile
-RUN source ~/.profile
 RUN git clone --recursive https://github.com/theos/theos.git $THEOS
-RUN sudo apt install -y zstd
+RUN apt-get update && apt-get install -y zstd
 RUN curl -LO https://github.com/CRKatri/llvm-project/releases/download/swift-5.3.2-RELEASE/swift-5.3.2-RELEASE-ubuntu18.04.tar.zst
 RUN TMP=$(mktemp -d) \
     && tar -I zstd -xvf swift-5.3.2-RELEASE-ubuntu18.04.tar.zst -C $TMP \
@@ -48,7 +47,7 @@ RUN TMP=$(mktemp -d) \
 RUN curl -LO https://github.com/theos/sdks/archive/master.zip \
     && TMP=$(mktemp -d) \
     && unzip master.zip -d $TMP \
-    && mkdir $THEOS/sdks
+    && mkdir $THEOS/sdks \
     && mv $TMP/sdks-master/*.sdk $THEOS/sdks \
     && rm -r master.zip $TMP
 
